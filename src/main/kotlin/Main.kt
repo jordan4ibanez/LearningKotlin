@@ -1,17 +1,28 @@
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.time.Instant.now
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.random.Random
 
 const val blah: String = "good day lad!"
 
+fun sum(a: Int, b: Int) = a + b
+
 fun main() = runBlocking {
-    launch {
-        delay(10000L)
-        println("hi")
-    }
-    launch {
-        delay(1000)
-        print("I come second")
+    val blah: AtomicInteger = AtomicInteger(2)
+
+    repeat(50_000) {
+        launch {
+            if ((0..10_000).random() > 5_000) {
+                println("up $blah")
+                blah.incrementAndGet()
+            } else {
+                blah.decrementAndGet()
+                println("down $blah")
+            }
+        }
+
     }
     println(blah)
 }
