@@ -1,6 +1,5 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.w3c.dom.css.Rect
 import java.util.concurrent.atomic.AtomicInteger
 
 const val blah: String = "good day lad!"
@@ -39,6 +38,18 @@ fun main() = run {
     val someAddition = 55
 
     println("$words and my cool addition is $someAddition")
+
+    // This is crazy
+    class InlinedClass(var good: Boolean)
+    fun InlinedClass.scream() = println("ahhh also ${this.good}")
+    fun boof() = println("Is this good? ${InlinedClass(true).good}")
+
+    boof()
+    InlinedClass(false).scream()
+
+    fun max(a: Int, b: Int) = if (a > b) a else b
+
+    print("Max of 1 and 2 is ${max(1, 2)}")
 
 }
 
