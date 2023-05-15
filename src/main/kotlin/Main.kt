@@ -1,5 +1,6 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.annotations.Nullable
 import java.util.concurrent.atomic.AtomicInteger
 
 const val blah: String = "good day lad!"
@@ -123,8 +124,39 @@ fun main() = run {
         .map { it }
         .forEach { println(it) }
 
-    
+    // Nullable
+    var nully: String? = null
+    nully = "test"
+    nully = null
+    println(nully == null)
 
+
+    // This one is just for fun
+    fun parseVoidFunction(input: () -> Unit) {
+        input()
+    }
+    // First class functions woooooo
+    val firstClass: () -> Unit = {
+        println("I am void")
+    }
+    parseVoidFunction(firstClass)
+
+    // Now even more fun
+    var counter = 0
+    fun parseRecursiveFunction(input: () -> Unit) {
+        counter++
+        if (counter > 55) {
+            return
+        }
+        input()
+    }
+    // Has to be defined like this, or it cannot pass itself in
+    fun aRecursiveFunction() {
+        println("I am also void")
+        parseRecursiveFunction(::aRecursiveFunction)
+    }
+
+    aRecursiveFunction()
 
 
 }
