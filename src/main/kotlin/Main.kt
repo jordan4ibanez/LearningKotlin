@@ -35,13 +35,16 @@ fun main() = run {
     val myCoolRectangle = Rectangle(3.0,3)
 
     // This is pretty sick
-    println("${myCoolRectangle.width}, ${myCoolRectangle.height.toDouble()}, ${myCoolRectangle.area}")
+    val words = "${myCoolRectangle.width}, ${myCoolRectangle.height.toDouble()}, ${myCoolRectangle.area}"
+    val someAddition = 55
+
+    println("$words and my cool addition is $someAddition")
 
 }
 
-class Shape
+open class Shape
 
-class Rectangle(val width: Number, val height: Number) {
+class Rectangle(val width: Number, val height: Number): Shape() {
     val area = width.toDouble().times(height.toDouble())
 }
 
