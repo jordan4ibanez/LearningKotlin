@@ -49,7 +49,66 @@ fun main() = run {
 
     fun max(a: Int, b: Int) = if (a > b) a else b
 
-    print("Max of 1 and 2 is ${max(1, 2)}")
+    println("Max of 1 and 2 is ${max(1, 2)}")
+
+    // Different ways to iterate
+    val myCoolList = listOf("1", "shoes", "3")
+    for (item in myCoolList) {
+        println(item)
+    }
+    myCoolList.forEach {
+        println(it)
+    }
+    for (it in myCoolList.iterator()) {
+        println(it)
+    }
+    myCoolList.forEach {
+        // Get the first letter
+        println(it[0])
+    }
+    var i = 0
+    while (i < myCoolList.size) {
+        println("list index $i is ${myCoolList[i]}")
+        i++
+    }
+
+    // function with localized variable function
+    fun get(index: Int): String {
+        fun match(): String {
+            return when (index) {
+                1 -> "That's a one"
+                2 -> "That's definitely a two"
+                3 -> "Hmm, a three"
+                else -> "I've never seen this number :O"
+            }
+        }
+        return "Your input was $index. ${match()}"
+    }
+    for (w in 1..4) {
+        println(get(w))
+    }
+
+    // anonymous function factory version
+    fun getFun(index: Int): () -> Unit {
+        fun match(): String {
+            return when (index) {
+                1 -> "That's a one"
+                2 -> "That's definitely a two"
+                3 -> "Hmm, a three"
+                else -> "I've never seen this number :O"
+            }
+        }
+        return fun() {
+            println("anonymous version: ${match()}")
+        }
+    }
+    for (w in 1..4) {
+        getFun(w)()
+    }
+
+
+
+
 
 }
 
