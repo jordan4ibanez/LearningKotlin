@@ -115,9 +115,15 @@ fun main() = run {
     }
     countEven(128)
 
+    // Messing with lists
+    val evenCoolerList = listOf("ford", "chevy", "3", "55", countEven(6).toString(), "hello world")
+    evenCoolerList
+        .filter { it.startsWith("f") || it.startsWith("c") }
+        .sortedBy { it }
+        .map { it }
+        .forEach { println(it) }
 
-
-
+    
 
 
 
