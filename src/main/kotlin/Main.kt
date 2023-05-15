@@ -25,7 +25,7 @@ fun main() = run {
 
     val yeah = 5.30f
 
-    var test = sum(yeah, yeah)
+    val test = sum(yeah, yeah)
 
     println(test)
 
@@ -105,6 +105,17 @@ fun main() = run {
     for (w in 1..4) {
         getFun(w)()
     }
+
+    // Even counter
+    fun countEven(input: Int) {
+        assert(input >= 2)
+        for (q in 2..input step 2) {
+            println(q)
+        }
+    }
+    countEven(128)
+
+
 
 
 
