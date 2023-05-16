@@ -157,6 +157,12 @@ fun main() = run {
 
     aRecursiveFunction()
 
+    // Inline classes
+    val tested = Points(1)
+    println(tested.test)
+
+    val tested2 = Points(33)
+    println(tested2)
 
 }
 
@@ -166,5 +172,6 @@ class Rectangle(val width: Number, val height: Number): Shape() {
     val area = width.toDouble().times(height.toDouble())
 }
 
-
+@JvmInline
+value class Points(val test: Int)
 
