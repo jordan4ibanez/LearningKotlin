@@ -164,6 +164,44 @@ fun main() = run {
     val tested2 = Points(33)
     println(tested2)
 
+
+    // Immutable list
+    val myReadOnlyList = listOf(1,2,3,4,5)
+    println("myReadOnlyList at index 0 is ${myReadOnlyList[0]}")
+
+    // Immutable map
+    val myCoolMap = mapOf("there" to 1, "here" to 0, "anywhereElse" to 2)
+    println("myCoolMap is here: ${myCoolMap["here"]}")
+
+    // Now we iterate myCoolMap three ways
+    for ((key, value) in myCoolMap) {
+        println("$key -> $value")
+    }
+    // I think this one looks the coolest :)
+    myCoolMap.forEach { (key, value) ->
+        println("$key -> $value")
+    }
+    for(dataObject in myCoolMap) {
+        println("${dataObject.key} -> ${dataObject.value}")
+    }
+
+    // Now THIS IS SO SICK AHHH
+
+    // Range can be an immutable value :D
+    val anInclusiveRange = 0..10
+
+    for (numba in anInclusiveRange) {
+        println("$numba is here")
+    }
+
+    val anExclusiveRange = 0 until 10
+
+    for (numba in anExclusiveRange) {
+        println("$numba is here")
+    }
+
+
+
 }
 
 open class Shape
