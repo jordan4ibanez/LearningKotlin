@@ -1,6 +1,5 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.annotations.Nullable
 import java.util.concurrent.atomic.AtomicInteger
 
 const val blah: String = "good day lad!"
@@ -41,12 +40,12 @@ fun main() = run {
     println("$words and my cool addition is $someAddition")
 
     // This is crazy
-    class InlinedClass(var good: Boolean)
-    fun InlinedClass.scream() = println("ahhh also ${this.good}")
-    fun boof() = println("Is this good? ${InlinedClass(true).good}")
+    class LocalClass(var good: Boolean)
+    fun LocalClass.scream() = println("ahhh also ${this.good}")
+    fun boof() = println("Is this good? ${LocalClass(true).good}")
 
     boof()
-    InlinedClass(false).scream()
+    LocalClass(false).scream()
 
     fun max(a: Int, b: Int) = if (a > b) a else b
 
