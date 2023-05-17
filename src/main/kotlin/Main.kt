@@ -218,31 +218,81 @@ fun main() = run {
         println("automobile is not a fruit ahhhHHHH")
     }
 
+    // This is disabled so I can keep learning
     // Terminal input
-    print("What is your name: ")
-    val userName = readln()
+//    print("What is your name: ")
+//    val userName = readln()
+//
+//    print("On a scale of 1-3 how are you feeling: ")
+//    // Inlined print switch with string interpolation :D
+//    println( "$userName, " +
+//        when (readln().toInt()) {
+//            0 -> "wat"
+//            1 -> "that's not good"
+//            2 -> "I suppose that's okay"
+//            3 -> "happy to hear it!!"
+//            else -> "not feeling it, Mr Krabs?"
+//    } )
 
-    print("On a scale of 1-3 how are you feeling: ")
-    // Inlined print switch with string interpolation :D
-    println( "$userName, " +
-        when (readln().toInt()) {
-            0 -> "wat"
-            1 -> "that's not good"
-            2 -> "I suppose that's okay"
-            3 -> "happy to hear it!!"
-            else -> "not feeling it, Mr Krabs?"
-    } )
+    // Generics
+    fun classScanner(input: Any) {
+        println(when (input) {
+            is Int -> "Integer"
+            is String -> "String"
+            is Char -> "Char"
+            is Float -> "Float"
+            is Double -> "Double"
+            else -> "WARNING! Unexpected type! Got: ${input.javaClass}"
+        })
+    }
+    classScanner(1)
+    classScanner(2.0)
+    classScanner(2.3f)
+    classScanner(1L)
+    classScanner(Rectangle(1,2))
+
+    // You can just do this apparently
+    (1 until 10).forEach {numba ->
+        println("$numba is pretty cool")
+    }
+
+    // Utilizing singleton
+    println("Is single boi single? ${SingleBoi.single}")
+
+    // Utilizing class that implements an abstract class
+    jordan4ibanez().doArt()
+
 
 
 
 }
 
+// Inheritable class
 open class Shape
 
+// Class that inherits from inheritable class
 class Rectangle(val width: Number, val height: Number): Shape() {
     val area = width.toDouble().times(height.toDouble())
 }
 
+// Inlined class
 @JvmInline
 value class Points(val test: Int)
 
+// Singleton
+object SingleBoi {
+    const val single = true
+}
+
+// Abstract class
+abstract class PietMondrian {
+    abstract fun doArt()
+}
+
+// Implements abstract class
+class jordan4ibanez : PietMondrian() {
+    private val creatorName = "jordan4ibanez"
+    override fun doArt() {
+        println("$creatorName doesn't know how to do art :(")
+    }
+}
