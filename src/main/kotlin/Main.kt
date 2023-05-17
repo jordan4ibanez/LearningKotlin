@@ -291,6 +291,8 @@ fun main() = run {
         fun stepForward() = posY++
         fun stepBack() = posY--
         fun printPos() = println("I am at: $posX, $posY")
+
+        var happiness = 0
     }
     val walkMan = Walker()
     // Here begins the scope
@@ -301,6 +303,13 @@ fun main() = run {
         (0 until 5).forEach { _ -> stepLeft() }
         printPos()
     }
+
+    // Add MORE things to a class constructor :O
+    // Alternatively, a completely BETTER way to do constructors!
+    val moreWalkMan = Walker().apply {
+        happiness = 10
+    }
+    print("moreWalkMan is feeling ${moreWalkMan.happiness} happiness")
 
 
 
