@@ -200,6 +200,39 @@ fun main() = run {
         println("$numba is here")
     }
 
+    // Scopes are pretty sweet
+    {
+        val tempBoi = "noice"
+        println(tempBoi)
+        // Goodbye tempBoi :'(
+    }
+
+    {{{{{
+        println("why would you do this though?")
+    }}}}}
+
+    // Filtering
+    val fruits = listOf("apple", "oranges", "automobile", "banana")
+
+    if ("automobile" in fruits) {
+        println("automobile is not a fruit ahhhHHHH")
+    }
+
+    // Terminal input
+    print("What is your name: ")
+    val userName = readln()
+
+    print("On a scale of 1-3 how are you feeling: ")
+    // Inlined print switch with string interpolation :D
+    println( "$userName, " +
+        when (readln().toInt()) {
+            0 -> "wat"
+            1 -> "that's not good"
+            2 -> "I suppose that's okay"
+            3 -> "happy to hear it!!"
+            else -> "not feeling it, Mr Krabs?"
+    } )
+
 
 
 }
