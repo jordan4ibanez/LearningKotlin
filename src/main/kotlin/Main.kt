@@ -262,6 +262,23 @@ fun main() = run {
     // Utilizing class that implements an abstract class
     jordan4ibanez().doArt()
 
+    // Nullable testing
+    class Blah {
+        fun test(): String {
+            return "success!"
+        }
+    }
+    val nullBoi: Blah? = null
+
+    println(nullBoi?.test())
+
+    val isNull = nullBoi == null
+
+    val testing = if (isNull) 1 else 0
+    println("test class is null? $testing $isNull")
+
+
+
 
 
 
