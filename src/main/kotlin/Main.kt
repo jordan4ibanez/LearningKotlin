@@ -347,7 +347,8 @@ fun main() = run {
     println(1.0 / 2.0)
     println("hi")
 
-
+    val binaryBoi = 1000
+    println(Integer.toBinaryString(binaryBoi))
 
 
 
