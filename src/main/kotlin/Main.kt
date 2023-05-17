@@ -309,7 +309,46 @@ fun main() = run {
     val moreWalkMan = Walker().apply {
         happiness = 10
     }
-    print("moreWalkMan is feeling ${moreWalkMan.happiness} happiness")
+    println("moreWalkMan is feeling ${moreWalkMan.happiness} happiness")
+
+    // Swapping two variables??
+    var a = 1
+    var b = 2
+    // wat, how is this even possible
+    a = b.also { b = a}
+
+    // Basic number types
+    var genericNumber: Number = 4
+
+    var byte: Byte = 1
+    var uByte: UByte = 2u
+
+    var short: Short = 22
+    var uShort: UShort = 22u
+
+    var int: Int = 1
+    var uInt: UInt = 1u
+
+    var long: Long = 1
+    var uLong: ULong = 1u
+
+    var float: Float = 1.0f
+    var double: Double = 2.0
+
+    // A D feature :D
+    var myLongNumber: Long = 1_000_000_000L
+    var myOtherLongNumber: Double = 1_000_123.000_123
+
+    // This is neat
+    var theStart: Byte = 122
+    var theEnd: UByte = theStart.toUByte()
+
+
+    println(1.0 / 2.0)
+    println("hi")
+
+
+
 
 
 
@@ -344,3 +383,5 @@ class jordan4ibanez : PietMondrian() {
         println("$creatorName doesn't know how to do art :(")
     }
 }
+
+class Testing
