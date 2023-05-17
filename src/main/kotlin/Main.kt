@@ -278,7 +278,29 @@ fun main() = run {
     println("test class is null? $testing $isNull")
 
 
+    // Single expression fun
+    fun gimmePi() = 3.14
+    fun gimmeLessPrecisePi() = 3.14f
 
+    // Calling multiple methods within the scope of an object
+    class Walker {
+        var posX = 0
+        var posY = 0
+        fun stepLeft() = posX--
+        fun stepRight() = posX++
+        fun stepForward() = posY++
+        fun stepBack() = posY--
+        fun printPos() = println("I am at: $posX, $posY")
+    }
+    val walkMan = Walker()
+    // Here begins the scope
+    with (walkMan) {
+        (0 until 10).forEach { _ -> // <-This part is just to shut up warning
+            stepForward()
+        }
+        (0 until 5).forEach { _ -> stepLeft() }
+        printPos()
+    }
 
 
 
