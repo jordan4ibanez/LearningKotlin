@@ -201,15 +201,23 @@ fun main() = run {
     }
 
     // Scopes are pretty sweet
-    {
+    run {
         val tempBoi = "noice"
         println(tempBoi)
         // Goodbye tempBoi :'(
     }
 
-    {{{{{
-        println("why would you do this though?")
-    }}}}}
+    run {
+        {
+            {
+                {
+                    {
+                        println("why would you do this though?")
+                    }
+                }
+            }
+        }
+    }
 
     // Filtering
     val fruits = listOf("apple", "oranges", "automobile", "banana")
