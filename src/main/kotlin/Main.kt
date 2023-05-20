@@ -359,6 +359,61 @@ fun main() = run {
     println(Integer.toBinaryString(binaryBoi))
 
 
+    // Booleans
+    val truth: Boolean = true
+    val falseness: Boolean = false
+    val nullBool: Boolean? = null
+
+    println("is truth true? $truth")
+    println("is falseness false? $falseness")
+    println("nullBool is $nullBool but it is equal to true? ${nullBool == true}")
+
+    // Unicode
+    println('\uFF00')
+
+    // Time for strings!
+
+    val myCoolString = "This is a cool string"
+
+    // Can iterate a string by char
+    for (char in myCoolString) {
+        println(char)
+    }
+    // Since internally the string is literally just a character array, we can iterate it like a list :D
+    myCoolString.forEachIndexed { index,char ->
+        println("myCoolString index: $index -> $char")
+    }
+
+    // This is definitely one way to do this
+    fun capitalizeFirstLetter(inputString: String): String {
+        if (inputString.isEmpty()) return inputString
+        if (!inputString[0].isLetter()) return inputString
+        val charArray = inputString.toCharArray()
+        charArray[0] = charArray[0].uppercaseChar()
+        return charArray.concatToString()
+    }
+
+    // Amazing
+    println(capitalizeFirstLetter("test 123"))
+
+    // Okay so now let's do the thing again, but let's functionally break it into more things
+    // For example, now let's capitalize the first letter of an entire sentence.
+    // Function chaining :D
+    fun capitalizeEveryFirstLetter(inputString: String): String {
+        val wordList: List<String> = inputString.split(" ")
+        val listSize = wordList.size - 1
+        val builder: StringBuilder = StringBuilder()
+
+        // Digest it
+        wordList.forEachIndexed { index, word ->
+            builder.append(capitalizeFirstLetter(word))
+            if (index < listSize) {
+               builder.append(" ")
+            }
+        }
+        return builder.toString()
+    }
+    println(capitalizeEveryFirstLetter("this is a test of my cool function ye"))
 
 
 }
