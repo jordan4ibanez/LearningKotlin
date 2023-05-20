@@ -498,6 +498,21 @@ fun main() = run {
         END MULTILINE ------------------------
     """.trimIndent().trimMargin(">"))
 
+    // This is pretty meta
+    println("test123 is of length: ${"test123".length}")
+
+    println("""
+        $9.99
+    """.trimIndent())
+    // It says to do ${'$'}_9.99, but I do not know why?
+    val price = """
+       $9.99 
+    """.trimIndent()
+    println(price)
+
+
+    // Time for arrays
+    
 }
 
 // Inheritable class
