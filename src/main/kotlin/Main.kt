@@ -456,7 +456,47 @@ fun main() = run {
     val giveMeAdminPrivsTrustMeBro = Command("/grantme all")
     println(giveMeAdminPrivsTrustMeBro.outputInformationString())
     Command.printCommandsRunCount()
+    println(Command("/ping").outputInformationString())
     // The answer was yes
+
+    // Kimpar gave me this idea, the name is for a reason
+    fun dontUseThisInProduction(input: String): Int {
+        var accumulator = 0
+        input.forEach {thisIsBad ->
+            accumulator += thisIsBad.code
+        }
+        return accumulator
+    }
+
+    println(dontUseThisInProduction("hi there i'm floop"))
+
+    // Apparently this just works too
+    println("test" + 123 + Command("/yell"))
+
+    // Some more string things because I want them documented in one file
+    println("${10f} ${10L} ${10} ${10.0}")
+    println("""
+        BEGIN MULTILINE ------------------------
+        hello dere
+        I am a big sentence
+        I like to type blah blah blah
+        pretty cool i think
+        END MULTILINE ------------------------
+    """.trimIndent())
+    println("""
+        BEGIN MULTILINE ------------------------
+        |This does some things
+        |What does it do?
+        | I have no idea :>
+        END MULTILINE ------------------------
+    """.trimIndent().trimMargin())
+    println("""
+        BEGIN MULTILINE ------------------------
+        >Now I get it
+        >I can remove the > character
+        >Pretty neat!
+        END MULTILINE ------------------------
+    """.trimIndent().trimMargin(">"))
 
 }
 
