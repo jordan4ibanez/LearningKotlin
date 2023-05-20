@@ -415,6 +415,21 @@ fun main() = run {
     }
     println(capitalizeEveryFirstLetter("this is a test of my cool function ye"))
 
+    // This is somehow possible
+    println("test".uppercase())
+    println("test".lowercase())
+    println("123".toLong())
+
+    // A BOLT ON to the string class
+    fun String.parseInt(): Int {
+        val temp = this.filter { it.isDigit() }
+        return when (temp.isEmpty()) {
+            true -> 0
+            false -> temp.toInt()
+        }
+    }
+    println("test".parseInt())
+    println("test123".parseInt())
 
 }
 
