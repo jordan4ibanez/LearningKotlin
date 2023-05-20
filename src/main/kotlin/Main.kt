@@ -431,6 +431,28 @@ fun main() = run {
     println("test".parseInt())
     println("test123".parseInt())
 
+    // I made this arguing with warr1024 about the default value of parseInt
+    class Person(age: Int, heightInMillimeters: Int, weight: Float) {
+        // Maybe they don't have a favorite number?
+        var favoriteNumber: Int = Int.MIN_VALUE
+
+        fun favoriteNumberHigher(otherPerson: Person): Boolean {
+            // This will throw runtime errors if special care is not taken
+            return favoriteNumber > otherPerson.favoriteNumber
+        }
+    }
+
+    val john = Person(23, 500, 123f).apply {
+        favoriteNumber = 55
+    }
+    val frank = Person(55, 123, -1f)
+
+    println("does john have a higher favorite number than frank? ${john.favoriteNumberHigher(frank)}")
+
+
+
+
+
 }
 
 // Inheritable class
