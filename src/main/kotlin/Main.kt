@@ -208,10 +208,10 @@ fun main() = run {
     }
 
     run {
-        {
-            {
-                {
-                    {
+        run {
+            run {
+                run {
+                    run {
                         println("why would you do this though?")
                     }
                 }
