@@ -449,9 +449,14 @@ fun main() = run {
 
     println("does john have a higher favorite number than frank? ${john.favoriteNumberHigher(frank)}")
 
-
-
-
+    // Now that argument made me wonder if this was easier in Kotlin than it is in java
+    val giveThisManSomeGooble = Command("/giveme blarp:gooble -1")
+    println(giveThisManSomeGooble.outputInformationString())
+    Command.printCommandsRunCount()
+    val giveMeAdminPrivsTrustMeBro = Command("/grantme all")
+    println(giveMeAdminPrivsTrustMeBro.outputInformationString())
+    Command.printCommandsRunCount()
+    // The answer was yes
 
 }
 
@@ -486,3 +491,74 @@ class jordan4ibanez : PietMondrian() {
 }
 
 class Testing
+
+class Command(val inputString: String) {
+    var isValid: Boolean = false
+        private set
+    private var internalElements: MutableList<String> = mutableListOf()
+    // This should realistically be a class, scanning through available command families in a map
+    var family: String = ""
+        private set
+    var arguments: MutableList<String> = mutableListOf()
+        private set
+
+    init {
+        commandsRunCount++
+        parseValidity()
+        if (isValid) {
+            parseElements()
+        }
+        if (isValid) {
+            parseCommandFamily()
+            parseCommandArguments()
+        }
+    }
+    private fun parseValidity() {
+        isValid = inputString[0] == '/'
+    }
+    private fun parseElements() {
+        internalElements = inputString.split(" ").toMutableList()
+        if (internalElements.isEmpty()) {
+            isValid = false
+        }
+        removeForwardSlash()
+    }
+    // There's probably a better way to do this
+    private fun removeForwardSlash() {
+        val builder = StringBuilder()
+        internalElements[0].forEachIndexed { index, char ->
+            if (index > 0) builder.append(char)
+        }
+        internalElements[0] = builder.toString()
+    }
+    private fun parseCommandFamily() {
+        family = internalElements[0]
+    }
+
+    private fun parseCommandArguments() {
+        if (internalElements.size == 1) return
+        for (i in 1 until internalElements.size) {
+            arguments.add(internalElements[i])
+        }
+    }
+
+    fun outputInformationString(): String {
+        if (!isValid) {
+            return "INVALID COMMAND!"
+        }
+        return "command family: $family\n" +
+                "command arguments: $arguments"
+    }
+
+    companion object {
+        var commandsRunCount = 0
+            private set
+        fun printCommandsRunCount() {
+            val pluralization = when (commandsRunCount) {
+                1 -> "command"
+                else -> "commands"
+            }
+            println("Game has ran $commandsRunCount $pluralization during runtime.")
+        }
+    }
+}
