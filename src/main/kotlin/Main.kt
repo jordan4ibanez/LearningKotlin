@@ -511,8 +511,32 @@ fun main() = run {
     println(price)
 
 
-    // Time for arrays
-    
+    // Time for arrays, the building blocks of a program! Woo
+
+    // the raw way
+    val interestingArray = Array(5){ w -> (w * w).toString() }
+    interestingArray.forEachIndexed { key,value -> println("interesting array: $key -> $value") }
+
+    // You could also one line that like this
+    Array(5){ w -> (w * w).toString() }.forEachIndexed { key,value -> println("interesting array inlined: $key -> $value") }
+
+    // Initialized to 0
+    val intArray: IntArray = IntArray(5)
+    intArray.forEach { assert(it == 0) }
+    println("all values in intArray are 0!")
+
+    // Initialized to 123
+    val intArray2: IntArray = IntArray(5){ 123 }
+    intArray2.forEach { assert(it == 123) }
+    println("all values in intArray2 are 123!")
+
+    // Initialize numerically with 0 count! so: 0,1,2,3,4
+    val intArray3: IntArray = IntArray(5){ it }
+    intArray3.forEachIndexed {key,value -> assert(key == value)}
+    println("all values in intArray3 are 0 counted!")
+
+
+
 }
 
 // Inheritable class
