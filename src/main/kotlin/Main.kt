@@ -540,7 +540,53 @@ fun main() = run {
 }
 
 fun moreLearning() {
-    println("woot!")
+
+    // Begin types
+
+    // You can wrapper an object as a package :D
+    val test: Any = 545
+    println(test.javaClass)
+
+    fun cool(blah: Int) {
+        println(blah)
+    }
+
+    // This doesn't work with it as any
+    // cool(test)
+
+    // This one does
+    cool(test as Int)
+
+    // Implicit auto cast
+    println(test + 0.5f)
+
+    fun floaty(blah: Float) {
+        println("That's floaty! $blah")
+    }
+
+    // Explicit cast
+    floaty(test.toFloat())
+
+    // Working with raw Number object
+    val rawBoi: Number = 54
+
+    fun getThatType(input: Any) {
+        when (input) {
+            is Long -> println("Long boi")
+            is Int -> println("Integral boi")
+            is Double -> println("Double floaty boi")
+            is Float -> println("Floaty boi")
+            else -> println("That's not a number :O")
+        }
+    }
+    getThatType(rawBoi)
+    getThatType(54L)
+    getThatType(54.4f)
+    getThatType(54.5)
+    getThatType("hi there")
+
+
+
 }
 
 // Inheritable class
