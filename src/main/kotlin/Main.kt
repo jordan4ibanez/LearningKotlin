@@ -535,8 +535,12 @@ fun main() = run {
     intArray3.forEachIndexed {key,value -> assert(key == value)}
     println("all values in intArray3 are 0 counted!")
 
+    // Now it's going to get a bit complicated so this will be moved into a new function scope :D
+    moreLearning()
+}
 
-
+fun moreLearning() {
+    println("woot!")
 }
 
 // Inheritable class
