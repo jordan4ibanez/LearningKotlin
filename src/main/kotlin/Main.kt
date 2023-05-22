@@ -806,6 +806,55 @@ fun evenMoreLearning() {
     parseANY(234)
     parseANY(234.234f)
 
+    // Double depth logic route
+    for (i in 0 until 100) {
+        println("$i is " +
+            when (i > 0) {
+                false -> "zero!"
+                true -> {
+                    when (i % 2 == 0) {
+                        true -> "even!"
+                        false -> "odd!"
+                    }
+                }
+            }
+        )
+    }
+
+    // Range checks
+    (0 until 21).forEach {
+        when (it) {
+            in 1..10 -> println("1 to ten $it")
+            !in 1..20 -> println("out of bounds $it")
+            else -> println("none of the conditions $it")
+        }
+    }
+
+    // Ultra generic string consumer modifier - Will return anything else as itself unmodified
+    fun processString(input: Any): Any = when(input) {
+        is String -> input.plus(" hi there")
+        else -> {
+            println("FAILED STRING PROCESSING")
+            input
+        }
+    }
+    println(processString("jordan"))
+    println(processString(2134))
+    println(processString(false))
+
+    // Taking a break to experiment with learned features
+
+    // Let's bolt on a little feature
+    fun Int.isOdd(): Boolean {
+        return this != 0 && this % 2 == 0
+    }
+    // Utilizing the one-liner functions
+    fun boolToSentenceModifier(truth: Boolean): String = if (truth) "yes" else "no"
+
+    // And do the same thing as above, but simpler
+    (0..100).forEach {
+        println("$it is even? ${boolToSentenceModifier(it.isOdd())}")
+    }
 
 
 
