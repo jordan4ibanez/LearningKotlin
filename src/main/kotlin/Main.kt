@@ -1,6 +1,8 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.collections.HashMap
 import kotlin.random.Random
 
 const val blah: String = "good day lad!"
@@ -986,8 +988,37 @@ fun evenMoreLearning() {
         println("I'm still running again yay!")
     }
 
+    // This one is a bit of an experiment, functional continue loop break.
+    // This is a purely speculative problem that I can foresee myself having.
+    // Might have to run this a few times to get a non-escaping procedure.
+    run {
+        // Set a purely arbitrary accumulator limitation
+        val limiter = 600
 
+        // Set scoped vars
+        var accumualator = 0
+        val list = mutableListOf<String>()
 
+        // Aggregate a random hashmap
+        val map = hashMapOf<String, Int>()
+        (0..10).forEach { _ ->
+            map[UUID.randomUUID().toString()] = Random.nextInt(120)
+        }
+
+        // Now iterate and utilize control flow labels
+        map.forEach { (key, value) ->
+            if (value > 500) return@forEach
+            accumualator += value
+            list.add(key)
+
+            if (accumualator > limiter) {
+                println("bailing out of loop accumulator has hit over $limiter! It is at $accumualator")
+                return@run
+            }
+        }
+        println("Final accumulation: $accumualator")
+        println("Map: $map")
+    }
 
 
 
