@@ -991,7 +991,7 @@ fun evenMoreLearning() {
     // This one is a bit of an experiment, functional continue loop break.
     // This is a purely speculative problem that I can foresee myself having.
     // Might have to run this a few times to get a non-escaping procedure.
-    run {
+    val failed = run {
         // Set a purely arbitrary accumulator limitation
         val limiter = 600
 
@@ -1013,12 +1013,17 @@ fun evenMoreLearning() {
 
             if (accumualator > limiter) {
                 println("bailing out of loop accumulator has hit over $limiter! It is at $accumualator")
-                return@run
+                // Additional debugging output (if this fails)
+                return@run true
             }
         }
         println("Final accumulation: $accumualator")
         println("Map: $map")
+
+        // Additional debugging output (if this fails)
+        return@run false
     }
+    println("The random function failed? $failed")
 
 
 
