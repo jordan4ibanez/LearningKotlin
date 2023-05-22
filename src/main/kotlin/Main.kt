@@ -647,6 +647,21 @@ fun moreLearning() {
     multiInterop(kotlinHashMap["test"] ?: "failure")
 
 
+    // A final test out of the scope of learning this section which can auto assign a function to do things with syntactic sugar
+    fun blah(input: Boolean) = when(input) {
+        true -> {
+            println("Yeah that's pretty true")
+        }
+        else -> {
+            println("Nah that's not true at all")
+        }
+    }
+
+    blah(true)
+    blah(false)
+
+    // Now back to smart casts
+
 
 
 
