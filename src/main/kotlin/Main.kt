@@ -781,10 +781,36 @@ fun evenMoreLearning() {
     // Let's do this again as a one-liner. Shows where semicolons can be used in Kotlin!
     (Random.nextInt(100) - 50).let { when {it > 0 -> println("positive! $it"); it < 0 -> println("negative! $it"); else -> "Zero! $it"} }
 
+    // This can automatically deduce types :O
+
+    fun parseIt(input: Number) {
+        when (input) {
+            input.toInt() -> println("It's an integer!")
+            else -> println("It's something else")
+        }
+    }
+
+    parseIt(4324)
+    parseIt(234.4)
+
+    // Can wrapper that further
+    fun parseANY(input: Any) {
+        if (input !is Number) {
+            println("Whoa there bud, that's not a number, that's ${input.javaClass}")
+            return
+        }
+        parseIt(input)
+    }
+
+    parseANY("hi there")
+    parseANY(234)
+    parseANY(234.234f)
+
 
 
 
 }
+
 
 // Inheritable class
 open class Shape
