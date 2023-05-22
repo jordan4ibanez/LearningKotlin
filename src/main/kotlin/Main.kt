@@ -1,7 +1,7 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicInteger
-import java.util.stream.IntStream
+import kotlin.random.Random
 
 const val blah: String = "good day lad!"
 
@@ -664,7 +664,7 @@ fun moreLearning() {
 
     // Type blocking function
     fun onlyAcceptStrings(input: Any) {
-        if (input !is String) {
+        if (input !is String || input.length == 0) {
             println("NOT A STRING!")
             return
         }
@@ -674,6 +674,31 @@ fun moreLearning() {
     onlyAcceptStrings(123)
     onlyAcceptStrings(false)
     onlyAcceptStrings("hi there")
+
+
+    // A mini test of Rust style handling
+    open class Result(val data: Any = false, val existence: Boolean) {
+        // Chainable
+        fun isSome(): Result? {
+            if (!existence) return null
+            return this
+        }
+        fun unwrap(): Any {
+            if (!existence) throw RuntimeException("Failed to unwrap None!")
+            return data
+        }
+    }
+    class Some(input: Any): Result(input, true)
+
+    // Now this is useful to the EXTREME!
+    class None : Result(existence =  false)
+
+    val nullValue = if (Random.nextBoolean()) true else null
+
+    val myCoolResult = nullValue?.let { Some(it) } ?: None()
+
+    println(myCoolResult.isSome()?.unwrap())
+
 
 
 
