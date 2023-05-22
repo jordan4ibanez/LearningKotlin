@@ -662,6 +662,19 @@ fun moreLearning() {
 
     // Now back to smart casts
 
+    // Type blocking function
+    fun onlyAcceptStrings(input: Any) {
+        if (input !is String) {
+            println("NOT A STRING!")
+            return
+        }
+        println("Got a string, it's length is: ${input.length}")
+    }
+
+    onlyAcceptStrings(123)
+    onlyAcceptStrings(false)
+    onlyAcceptStrings("hi there")
+
 
 
 
