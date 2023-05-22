@@ -229,10 +229,10 @@ fun main() = run {
 
     // This is disabled so I can keep learning
     // Terminal input
-//    print("What is your name: ")
+//    println("What is your name: ")
 //    val userName = readln()
 //
-//    print("On a scale of 1-3 how are you feeling: ")
+//    println("On a scale of 1-3 how are you feeling: ")
 //    // Inlined print switch with string interpolation :D
 //    println( "$userName, " +
 //        when (readln().toInt()) {
@@ -855,6 +855,141 @@ fun evenMoreLearning() {
     (0..100).forEach {
         println("$it is even? ${boolToSentenceModifier(it.isOdd())}")
     }
+
+    // A cascading functional style
+    IntArray(10) { it }.forEachIndexed { key,value ->
+        println("$key -> $value")
+    }
+
+    // One liner styles
+    val myCoolIntArray = IntArray(10) { it * 100 }
+    
+    for (item in myCoolIntArray) println(item)
+    
+    // More explicit
+    for (item: Int in myCoolIntArray) println(item)
+
+    // Functional
+    myCoolIntArray.forEach { println(it) }
+
+    // Ranges again
+    for (i in 1..3) println(i)
+
+    // 6, 4, 2, 0
+    for (i in 6 downTo 0 step 2) println(i)
+
+    // Count by 5
+    for (i: Int in 0..100 step 5) println(i)
+
+    // Count by 5 but this will miss 100, so it will count UNTIL 100 is reached
+    for (i: Int in 0 until 100 step 5) println(i)
+
+    // Count up and down 1 to 10 10 to 1 10 times
+    /* This would look kind of like this on a 2d graph
+     /\  /\  /\  /\  /\
+    /  \/  \/  \/  \/  \
+     */
+    for (unused in 1..10) {
+        // Using that function bolt on from before :)
+        when (unused.isOdd()) {
+            false -> (0..10).forEach { println("$it up we gooo!") }
+            true -> (10 downTo 0).forEach{ println("$it down we gooo!") }
+        }
+    }
+
+    // Another sidetrack, experimenting with
+    val myHashMap = hashMapOf<String, Number>(
+        "test" to 123,
+        "pi" to 3.14,
+        "life" to 42L
+    )
+
+    for (keyValue in myHashMap) {
+        println("${keyValue.key} -> ${keyValue.value}")
+    }
+
+    myHashMap.forEach { key,value ->
+        println("$key -> $value")
+    }
+
+    for ((key,value) in myHashMap) {
+        println("$key -> $value")
+    }
+
+    println("I got this for flarp: ${myHashMap.getOrDefault("flarp", 0)}")
+
+    // Starting a new scope so this doesn't affect things down the line
+    run {
+        var w = 10
+        while (w >= 0) {
+            println("w is $w")
+            w--
+        }
+    }
+
+
+    run {
+        class Person(val name: String?)
+        val john = Person(name = null)
+        // A mini jump
+        val s = john.name ?: "oops"
+        println("John's name is $s")
+    }
+
+    // Breaking a loop
+    loop@ for (i in 0..100) {
+        if (i > 50) break@loop
+    }
+
+    // Break labels
+    outer@ for (i in 0..100) {
+        inner@ for (w in 0..100) {
+            if (w > 20) break@inner
+        }
+        if (i > 30) break@outer
+    }
+
+
+    // Functional function flow
+
+    // Style 1
+    run {
+        listOf(1,2,3,4,5).forEach {
+            // This works as a function "continue"
+            if (it == 3) return@forEach
+            println("Loopy $it")
+        }
+        println("I'm still running woot!")
+    }
+
+    // Style 2
+    run {
+        // Function is a first class citizen :)
+        listOf(1,2,3,4,5).forEach(fun(value: Int) {
+            // This works as a functional "continue"
+            if (value == 3) return
+            println("Loopy $value")
+        })
+        println("I'm still running woot!")
+    }
+
+    // Simulation of break in functional flow
+    // Run is just so I don't have to call this as a function
+    run {
+        run loop@ {
+            listOf(1, 2, 3, 4, 5).forEach {
+                // Break
+                if (it == 3) return@loop
+                println("Loopy $it")
+            }
+        }
+        println("I'm still running again yay!")
+    }
+
+
+
+
+
 
 
 
