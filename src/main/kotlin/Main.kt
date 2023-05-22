@@ -688,7 +688,7 @@ fun moreLearning() {
             return data
         }
     }
-    class Some(input: Any): Result(input, true)
+    class Some(input: Any) : Result(input, true)
 
     // Now this is useful to the EXTREME!
     class None : Result(existence =  false)
@@ -699,7 +699,87 @@ fun moreLearning() {
 
     println(myCoolResult.isSome()?.unwrap())
 
+    // Unsafe casts
+    val y = 4
 
+    // Fails
+    // val x: String = y as String
+
+    // Fails
+    // val x: String? = y as String?
+
+    // X turns into null
+    val x: String? = y as? String
+
+    println(x)
+
+    // Chaining yet another function into a new scope
+    evenMoreLearning()
+}
+
+fun evenMoreLearning() {
+
+    // Onto control flow we go
+
+    // Conditions and loops
+
+    val a = Random.nextInt(123)
+    val b = Random.nextInt(123)
+
+    var max = a
+
+    // One line assignment
+    if (a < b) max = b
+
+    // As an else statement
+    if (a > b) {
+        max = a
+    } else {
+        max = b
+    }
+
+    // As an expression
+    max = if (a > b) a else b
+
+    // This one's going to take a bit to get used to
+    val maxLimit = 1
+    val maxOrLimit = if (maxLimit > a) maxLimit else if (a > b) a else b
+
+    val max2 = if (a > b) {
+        println("Chose A")
+        a
+    } else {
+        println("Chose B")
+        b
+    }
+    println("Max is $max")
+    println("Max or limit is $maxOrLimit")
+    println("Max2 is $max2")
+
+    // When expression
+    val x = 100 > Random.nextInt(1000)
+
+    when (x) {
+        true -> println("X was true")
+        false -> println("X was false")
+        // Not necessary
+        else -> println("X was somehow something else")
+    }
+
+    // An interesting way to do comparators
+    val cool = Random.nextInt(100) - 50
+
+    cool.let {
+        when {
+            it > 0 -> println("cool is positive! $it")
+            it < 0 -> println("cool is negative! $it")
+            // Intellij is so smart it knows that this branch is always zero :D
+            else -> println("cool is zero! $it")
+        }
+    }
+
+    // Let's do this again as a one-liner. Shows where semicolons can be used in Kotlin!
+    (Random.nextInt(100) - 50).let { when {it > 0 -> println("positive! $it"); it < 0 -> println("negative! $it"); else -> "Zero! $it"} }
 
 
 
