@@ -1,5 +1,6 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap
@@ -1025,9 +1026,17 @@ fun evenMoreLearning() {
     }
     println("The random function failed? $failed")
 
+    // Into the next scope we goooo
+    moreStuffWoo()
+}
 
+fun moreStuffWoo() {
 
-
+    try {
+        throw Exception("Hello")
+    } catch (e: Exception) {
+        println("Caught an exception! $e")
+    }
 
 }
 
