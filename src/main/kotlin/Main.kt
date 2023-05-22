@@ -1,6 +1,7 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicInteger
+import java.util.stream.IntStream
 
 const val blah: String = "good day lad!"
 
@@ -584,6 +585,69 @@ fun moreLearning() {
     getThatType(54.4f)
     getThatType(54.5)
     getThatType("hi there")
+
+    // Different ways to work with the string
+
+    val myString = "hi I'm a string"
+
+    val myCharSequence = myString.asSequence()
+    val myCharArray = myString.toCharArray()
+    val myCharIntStream = myString.chars()
+    // You can get the string as integers!
+    myCharIntStream.forEach {
+        println("$it")
+    }
+
+    // Smart casting is so sick
+    fun multiInterop(input: Any) {
+        when (input) {
+            is String -> {
+                println("String length is: ${input.length}")
+            }
+            is Int -> {
+                println("$input plus 4 is: ${input + 4}")
+            }
+            // No else branch needed :D
+        }
+    }
+
+    multiInterop("Hello I am a string")
+    multiInterop(5555)
+    multiInterop(HashMap<String, Int>(0))
+
+    // Skipping ahead a bit to try something here with hashmaps
+
+    // This is the one to use, the kotlin defined one
+    val kotlinHashMap = hashMapOf<String, Int>()
+
+    // This just gives you a java hashmap
+    // I think this is designed like this for interop with java code
+    // val javaHashMap = HashMap<String, Int>()
+
+    // This feels kind of like lua - Assignment
+    kotlinHashMap["test"] = 55
+    kotlinHashMap["hi there"] = 123
+
+    // Now I'm looking this up before getting to the hashmap section so this might be wrong?
+    if ("test1" in kotlinHashMap) {
+        println("test1 is in there!")
+    } else {
+        println("test1 was not in there")
+    }
+
+    // Safety check inline - Prevents a crash
+    val gotIt = kotlinHashMap["test1"] ?: "nope"
+
+    println("BEGIN INTEROP INTO HASHMAP ----------")
+
+    // We can throw it into the function above
+    multiInterop(gotIt)
+
+    // Now let's inline this to get a known value
+    multiInterop(kotlinHashMap["test"] ?: "failure")
+
+
+
 
 
 
