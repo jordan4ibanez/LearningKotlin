@@ -1076,6 +1076,8 @@ fun moreStuffWoo() {
     val blah3 = if (b as? Int != null) b as? Int else 0
     println(blah3)
 
+    // This file was over 1_000 lines long at this point so part2 is in Classes and Objects.kt
+    part2()
 }
 
 
