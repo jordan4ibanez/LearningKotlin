@@ -1032,11 +1032,23 @@ fun evenMoreLearning() {
 
 fun moreStuffWoo() {
 
+    // Time for exceptions
+
+    // Try block
     try {
-        throw Exception("Hello")
+        throw Exception("I am an exception, yay")
     } catch (e: Exception) {
-        println("Caught an exception! $e")
+        println("Caught an exception! ($e)")
+    } finally {
+        println("we did it bois")
     }
+
+    // Try expression
+    val isThisGood: Int? = try { "blah".toInt() } catch (e: Exception) { null }
+    println("well, was it good? $isThisGood")
+
+
+
 
 }
 
@@ -1073,7 +1085,7 @@ class jordan4ibanez : PietMondrian() {
 
 class Testing
 
-class Command(val inputString: String) {
+class Command(private val inputString: String) {
     var isValid: Boolean = false
         private set
     private var internalElements: MutableList<String> = mutableListOf()
