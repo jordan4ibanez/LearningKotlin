@@ -1,8 +1,8 @@
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.lang.Exception
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.Exception
 import kotlin.collections.HashMap
 import kotlin.random.Random
 
@@ -1048,7 +1048,33 @@ fun moreStuffWoo() {
     println("well, was it good? $isThisGood")
 
 
+    // Try block assignment
+    val test: Int? = if (Random.nextBoolean()) null else 1
 
+    val blah2 = try {
+        test ?: throw RuntimeException("oh no")
+    } catch (e: Exception) {
+        3
+    }
+
+    println("blah2 is $blah2")
+
+    // Nothing is also a type, so it can be used in expressions
+    fun breakIt(): Nothing {
+        throw IllegalAccessError("you done goofed now boi")
+    }
+    // Commented out for a reason :P
+    // breakIt()
+
+    // You can use it like this!
+    // val oof = null ?: breakIt()
+
+    val b = null
+    println("b is type Nothing? : ${b is Nothing?}")
+
+    // Interesting experiment
+    val blah3 = if (b as? Int != null) b as? Int else 0
+    println(blah3)
 
 }
 
