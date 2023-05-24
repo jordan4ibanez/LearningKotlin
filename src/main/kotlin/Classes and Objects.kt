@@ -36,8 +36,48 @@ fun part2() {
     val myCoolNumber = Random.nextInt(20).also { it -> greaterThanTen = (it > 10).also{ println("Was it greater than 10? $it") } }
     println("greater than ten? $greaterThanTen and the number was $myCoolNumber")
 
+    Customer("frank")
 
+    // Initialized via primary and secondary
+    TrailingTest("ye", "oh ye"/*, left to default*/).toString().also(::println)
+    TrailingTest2("yurp", "derp"/*, left to default*/).toString().also(::println)
 }
+
+data class Blah(val bloop: Boolean)
+
+class TrailingTest(
+    // Auto initialized values
+    // This is a primary constructor
+    val potatoes:  String,
+    val tomatoes: String,
+    val rotten: Boolean = false
+) // is equivalent to:
+class TrailingTest2 {
+    val potatoes: String
+    val tomatoes: String
+    val rotten: Boolean
+
+    constructor(potatoes: String, tomatoes: String, rotten: Boolean = false) {
+        this.potatoes = potatoes
+        this.tomatoes = tomatoes
+        this.rotten = rotten
+    }
+
+    override fun toString(): String {
+        return "TrailingTest2: potatoes: $potatoes, tomatoes: $tomatoes, rotten: $rotten"
+    }
+}
+
+// This started going backwards from this point on, I don't feel like scrolling down anymore. So scroll upwards to see more progress
+
+class Customer(name: String) {
+    val customerName = name.uppercase()
+
+    init {
+        customerName.also(::println)
+    }
+}
+
 
 // You can omit the constructor key word
 class VerbosePerson constructor(firstName: String)
