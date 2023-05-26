@@ -1,11 +1,7 @@
-import kotlin.math.sign
-import kotlin.reflect.KParameter
-import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.instanceParameter
 import kotlin.reflect.full.memberFunctions
 
 fun evenMoreThingsAHHH() {
-
 
     copyAddress(Address(
         name = "Holmes, Sherlock",
@@ -25,6 +21,37 @@ fun evenMoreThingsAHHH() {
             println("width: ${myCoolRectangle.width} | height: ${myCoolRectangle.height}")
     }
 
+    // Gets a nice compiler warning
+    // dontUseThis()
+
+
+    // This errors out
+    // LateInitialization().blah.also { println("$it not initialized")}
+
+    // This doesn't
+    LateInitialization().setUp().blah.also { println("$it initialized") }
+
+
+
+
+}
+
+class LateInitialization {
+
+    // Wrapper a number in an integer
+    lateinit var blah: Number
+
+    fun setUp(): LateInitialization {
+        blah = 55
+        return this
+    }
+}
+
+const val DEPRECATED = "This function is deprecated!"
+
+// That's pretty neat :D
+@Deprecated(DEPRECATED) fun dontUseThis(): Int {
+    return 314
 }
 
 // Pretend this is called "rectangle"
@@ -66,6 +93,7 @@ fun tupleReturnMonstrosity(): Triple<Triple<Any, Any, Any>, Triple<Any, Any, Any
     return Triple(Triple(Nothing(), 2134, "wow"), Triple(Address(), "flops", "234"), Triple(1,2, 3))
 }
 
+// This could be input: Any | output: Any
 fun copyAddress(address: Address): Address {
 
     // This is the raw Kotlin version of it without reflection, very rigid, but supports non-data class
@@ -90,6 +118,6 @@ fun copyAddress(address: Address): Address {
 
         // You could write it like so:
         return it.callBy(mapOf(it.instanceParameter!! to address)) as Address
-        // (I liked the second one better)
+        // (I liked the inlined version better)
     }
 }
