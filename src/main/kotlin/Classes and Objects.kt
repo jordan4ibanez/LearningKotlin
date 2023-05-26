@@ -46,6 +46,51 @@ fun part2() {
 
     MrGreeter()
     MrGreeter("Good day")
+
+    MultipleConstructors().doTheBlah()
+    MultipleConstructors(2).doTheBlah()
+    MultipleConstructors("flarp").doTheBlah()
+
+    // Can't create this class
+    // YouCantCreateMe() <- NOPE!
+    // YouCantCreateMe.blah() <- NOPE!
+
+    // Needed a companion class to be...java-y
+    YouCantCreateMe.realBlah()
+
+
+}
+
+class YouCantCreateMe private constructor() {
+    // Impossible function :D
+    fun blah() {
+        println("i'm pretty blah!")
+    }
+
+    companion object {
+        fun realBlah() {
+            println("blah blah blah")
+        }
+    }
+}
+
+class MultipleConstructors {
+    // Many constructors that stream into one value
+    private val blah: String
+    constructor() {
+        blah = "Nothing :D"
+    }
+    constructor(inputNumber: Int) {
+        blah = inputNumber.toString()
+    }
+
+    constructor(inputString: String) {
+        blah = inputString
+    }
+
+    fun doTheBlah() {
+        println("blah is $blah")
+    }
 }
 
 
