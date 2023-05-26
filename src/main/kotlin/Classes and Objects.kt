@@ -58,7 +58,68 @@ fun part2() {
     // Needed a companion class to be...java-y
     YouCantCreateMe.realBlah()
 
+    // Kotlin does not have a new keyword, but I think we've learned that at this point :P
+    // val test = new Blah()
 
+    // Nested class mess test
+    Outer().doesItYerp()
+
+    Character().move()
+
+    End().bloop()
+}
+
+open class Base(val name: String) {
+    init {
+        println("Initialing the base class")
+    }
+
+    open val size: Int = name.length.also { println("Initializing size in base class = $it") }
+}
+
+
+interface Floop {
+    val blarf: Int
+}
+
+class Flooper : Floop {
+    override val blarf = 55
+}
+
+// Inheritance access
+open class Start {
+    protected open var i = 5
+}
+
+class End : Start() {
+    override var i = 25
+    fun bloop() {
+        println(i)
+    }
+}
+
+
+// Abstract classes again
+abstract class Entity {
+    abstract fun move()
+}
+// Class which implements Entity
+class Character: Entity() {
+    override fun move() {
+        println("I'm moving!")
+    }
+}
+
+// Nested classes
+class Outer(val coolBeans: String = "Yep those beans are pretty cool") {
+    private val innie = Inner()
+    private class Inner {
+        // Do something else
+        val test: String = "yerp"
+    }
+    fun doesItYerp() {
+        innie.test.also(::println)
+    }
 }
 
 class YouCantCreateMe private constructor() {
