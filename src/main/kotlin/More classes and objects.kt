@@ -28,8 +28,12 @@ fun copyAddress(address: Address): Address {
         println(it)
         it.name == "copy"
     }.also {
+        // This portion could be INLINED :D See below
         val instanceParameters: KParameter = it.instanceParameter ?: throw RuntimeException("ERROR: Failed to get instance parameter!")
         // This is creating a raw generic Object, then being cast into object type
         return it.callBy(mapOf(instanceParameters to address)) as Address
+
+        // You could write it like so:
+        // return it.callBy(mapOf(it.instanceParameter!! to address)) as Address
     }
 }
