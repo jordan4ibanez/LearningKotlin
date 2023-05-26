@@ -852,7 +852,8 @@ fun evenMoreLearning() {
         return this != 0 && this % 2 == 0
     }
     // Utilizing the one-liner functions
-    fun boolToSentenceModifier(truth: Boolean): String = if (truth) "yes" else "no"
+    // This has been moved to package scope below
+    // fun boolToSentenceModifier(truth: Boolean): String = if (truth) "yes" else "no"
 
     // And do the same thing as above, but simpler
     (0..100).forEach {
@@ -1080,6 +1081,7 @@ fun moreStuffWoo() {
     part2()
 }
 
+fun boolToSentenceModifier(truth: Boolean): String = if (truth) "yes" else "no"
 
 // Inheritable class
 open class Shape
