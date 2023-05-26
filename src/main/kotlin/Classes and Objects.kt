@@ -41,6 +41,45 @@ fun part2() {
     // Initialized via primary and secondary
     TrailingTest("ye", "oh ye"/*, left to default*/).toString().also(::println)
     TrailingTest2("yurp", "derp"/*, left to default*/).toString().also(::println)
+
+    Nothing()
+
+    MrGreeter()
+    MrGreeter("Good day")
+}
+
+
+class MrGreeter(greeting: String = "hi there") {
+
+    // As you can see here, the localized variable is now passed into the initializer
+    init {
+        println("$greeting, traveler")
+    }
+    // Uncomment this to see: When the initializer goes out of scope, greeting is gone!
+    // fun yeah() = println("$greeting")
+}
+
+// Class which has no constructor yet can initialize with code running
+class Nothing {
+
+    // A blank constructor, literally does nothing
+    constructor()
+    // Init doesn't exist for this constructor
+
+    // "greeting" is totally unused
+    constructor(greeting: String = "hi there")
+    init {
+        // Uncomment this to see that the local "greeting" variable does not get passed into the init
+        // println("I'm nothing woooo, your greeting is: $greeting")
+
+        // Uncomment this for a nice stack overflow :D
+        // Nothing()
+    }
+
+    // Uncomment this to see that you cannot have duplicate constructors
+    // constructor(shmeating: String = "hi there" ) {
+    //    println("$shmeating")
+    // }
 }
 
 data class Blah(val bloop: Boolean)
@@ -51,16 +90,18 @@ class TrailingTest(
     val potatoes:  String,
     val tomatoes: String,
     val rotten: Boolean = false
-) // is equivalent to:
+) { init {println("flarp")} }// is equivalent to:
 class TrailingTest2 {
     val potatoes: String
     val tomatoes: String
     val rotten: Boolean
 
+    // Secondary constructor
     constructor(potatoes: String, tomatoes: String, rotten: Boolean = false) {
         this.potatoes = potatoes
         this.tomatoes = tomatoes
         this.rotten = rotten
+        println("flarp")
     }
 
     override fun toString(): String {
