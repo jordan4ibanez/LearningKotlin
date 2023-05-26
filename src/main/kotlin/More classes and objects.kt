@@ -31,10 +31,53 @@ fun evenMoreThingsAHHH() {
     // This doesn't
     LateInitialization().setUp().blah.also { println("$it initialized") }
 
+    // Testing functional interface
+    val john = Person2 (
+        talker = {
+            println("Hi, I'm John!")
+        },
+        mather = { i ->
+            // isEven, automatic return boolean
+            i != 0 && i % 2 == 0
+        }
+    )
 
+
+    with (john) {
+        speak()
+        // Apparently you can just define functions here too??
+        fun isOrNot(input: Boolean): String {
+            return if (input) "it's" else "it's not"
+        }
+        doMath(45).also { println("${boolToSentenceModifier(it)}, ${isOrNot(it)} even") }
+    }
 
 
 }
+
+// Okay so I got to the part with SAM interfaces, so I want to experiment with it here
+
+// -- Begin experiment --
+
+fun interface Talk {
+    fun run()
+}
+
+// This is straight out of the tutorial
+fun interface IntPredicate {
+    fun accept(i: Int): Boolean
+}
+
+class Person2(private val talker: Talk, private val mather: IntPredicate) {
+    fun speak() {
+        talker.run()
+    }
+
+    fun doMath(input: Int): Boolean = mather.accept(input)
+}
+
+
+// -- End experiment --
 
 class LateInitialization {
 
