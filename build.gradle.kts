@@ -12,7 +12,11 @@ repositories {
 
 dependencies {
 
+    // Needed for lightweight threads "coroutines"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+
+    // Needed for Kotlin reflection
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")
 
     testImplementation(kotlin("test"))
 }
