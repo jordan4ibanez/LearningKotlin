@@ -67,9 +67,31 @@ fun part2() {
     Character().move()
 
     End().bloop()
+
+    Derived("mike", "franklin")
+
+    FilledRectangle().draw()
+
+    // This file is getting more complex, so let's chain even more stuff in woooo
+    evenMoreThingsAHHH()
 }
 
-open class Base(val name: String) {
+open class RectangleImage {
+    open fun draw() { println("Drawing the rectangle") }
+    val borderColor: String
+        get() = "black"
+}
+class FilledRectangle : RectangleImage() {
+    override fun draw() {
+        super.draw()
+        println("Filling the rectangle with color $fillColor")
+    }
+
+    val fillColor: String
+        get() = super.borderColor
+}
+
+open class Base(private val name: String) {
     init {
         println("Initialing the base class")
     }
@@ -77,6 +99,13 @@ open class Base(val name: String) {
     open val size: Int = name.length.also { println("Initializing size in base class = $it") }
 }
 
+class Derived(name: String, private val lastName: String) : Base(name.replaceFirstChar { it.uppercase() }.also { println("Argument for the base class: $it") }) {
+    init {
+        println("Initializing a derived class")
+    }
+
+    override val size: Int = (super.size + lastName.length).also { println("Initializing size in the derived class: $it") }
+}
 
 interface Floop {
     val blarf: Int
