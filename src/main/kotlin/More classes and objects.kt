@@ -1,8 +1,5 @@
 import kotlin.reflect.full.instanceParameter
 import kotlin.reflect.full.memberFunctions
-import kotlin.reflect.jvm.internal.impl.load.java.structure.JavaClass
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
-import kotlin.reflect.jvm.internal.impl.types.KotlinType
 
 fun evenMoreThingsAHHH() {
 
@@ -88,12 +85,21 @@ fun evenMoreThingsAHHH() {
 
         }
     }
+    // Alternatively this can be written like this
+    when (mathMaster.calculate("nonexistent", 1,2,3).isType(Nothing::class.java).first) {
+        true -> println("true")
+        false -> println("false")
+    }
+
     mathMaster.isType(Nothing::class.java).also {
         when (it.first) {
             true -> println("got nothing")
             false -> println("got something! It was ${it.second::class.java}")
         }
     }
+
+    // Onto the next part we goooooooooooooooooo
+    noIdeaWhatToCallThis()
 }
 
 private fun Any.isType(type: Class<*>): Pair<Boolean, Any> {
