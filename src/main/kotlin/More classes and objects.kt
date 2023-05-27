@@ -1,5 +1,8 @@
 import kotlin.reflect.full.instanceParameter
 import kotlin.reflect.full.memberFunctions
+import kotlin.reflect.jvm.internal.impl.load.java.structure.JavaClass
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
+import kotlin.reflect.jvm.internal.impl.types.KotlinType
 
 fun evenMoreThingsAHHH() {
 
@@ -76,6 +79,29 @@ fun evenMoreThingsAHHH() {
     )
     mathMaster.calculate("add", 1, 2, 3, 4, 5).also { println("1 + 2 + 3 + 4 + 5 = $it") }
 
+    mathMaster.calculate("nonexistent", 1,2,3).also {
+        it.isType(Nothing::class.java).also {returningPair ->
+            val first = returningPair.first
+            val second = returningPair.second
+            when (first) {
+                true -> println("got nothing")
+                false -> println("got something! It was $second")
+            }
+
+        }
+    }
+    (mathMaster).isType(Nothing::class.java).also {
+        val first = it.first
+        val second = it.second::class.java
+        when (first) {
+            true -> println("got nothing")
+            false -> println("got something! It was $second")
+        }
+    }
+}
+
+private fun Any.isType(type: Class<*>): Pair<Boolean, Any> {
+    return Pair(this.javaClass.toString() == type.toString(), this)
 }
 
 // Now this part is a ridiculous experiment, I want to see if a custom object can hold a custom instance of functions
