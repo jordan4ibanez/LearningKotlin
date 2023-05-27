@@ -80,22 +80,18 @@ fun evenMoreThingsAHHH() {
     mathMaster.calculate("add", 1, 2, 3, 4, 5).also { println("1 + 2 + 3 + 4 + 5 = $it") }
 
     mathMaster.calculate("nonexistent", 1,2,3).also {
-        it.isType(Nothing::class.java).also {returningPair ->
-            val first = returningPair.first
-            val second = returningPair.second
-            when (first) {
+        it.isType(Nothing::class.java).also {pair ->
+            when (pair.first) {
                 true -> println("got nothing")
-                false -> println("got something! It was $second")
+                false -> println("got something! It was ${pair.second}")
             }
 
         }
     }
-    (mathMaster).isType(Nothing::class.java).also {
-        val first = it.first
-        val second = it.second::class.java
-        when (first) {
+    mathMaster.isType(Nothing::class.java).also {
+        when (it.first) {
             true -> println("got nothing")
-            false -> println("got something! It was $second")
+            false -> println("got something! It was ${it.second::class.java}")
         }
     }
 }
