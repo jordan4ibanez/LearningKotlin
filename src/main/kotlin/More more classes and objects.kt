@@ -10,7 +10,45 @@ fun noIdeaWhatToCallThis() {
     // It's also chainable
     myCoolSentence.swap().asSentence().also(::println)
 
+    val blah = listOf("hi", "there", "I'm", 'a', "list", 123)
+    blah[blah.lastIndex].also(::println)
+
+    val chunky = Chunk(1,2)
+    val moreChunk = Chunk(0,0)
+
+    require(chunky != moreChunk) {"Uhh, this should have failed BOI"}
+    println("passed inequality check!")
+
+    val funkyChunk = Chunk(1,2)
+
+    require(chunky == funkyChunk) {"These should be equal!"}
+    println("passed equality check!")
+
 }
+data class Chunk (
+    val posX: Int,
+    val posY: Int,
+) {
+    val data: IntArray = IntArray(32_768)
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Chunk) return false
+
+        if (posX != other.posX) return false
+        if (posY != other.posY) return false
+        return data.contentEquals(other.data)
+    }
+
+    override fun hashCode(): Int {
+        var result = posX
+        result = 31 * result + posY
+        result = 31 * result + data.contentHashCode()
+        return result
+    }
+}
+
+val <T> List<T>.lastIndex: Int
+    get() = size - 1
 
 // You can just bolt on stuff to anything, it's a miracle
 fun MutableList<String>.asSentence(separator: String = " "): String {
