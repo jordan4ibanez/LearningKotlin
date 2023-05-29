@@ -27,8 +27,8 @@ enum class Color (val rgb: Int) {
     BLUE(0x0000FF)
 }
 
-// So an enum I suppose would look like this if deconstructed, and absolutely cumbersome to work with
-class VerboseColor(val rgb: Int, val name: String)
+// So an enum I suppose would look like this if deconstructed, and it's absolutely cumbersome to work with
+data class VerboseColor(val rgb: Int, val name: String)
 
 class Colors {
     companion object {
