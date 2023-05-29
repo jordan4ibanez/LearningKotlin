@@ -12,7 +12,8 @@ fun enums() {
         println("$index -> ${color.name} -> ${color.rgb}")
     }
 
-
+    // Onto the next portion wooo
+    inlineClasses()
 
 }
 
