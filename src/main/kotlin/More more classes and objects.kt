@@ -24,7 +24,50 @@ fun noIdeaWhatToCallThis() {
     require(chunky == funkyChunk) {"These should be equal!"}
     println("passed equality check!")
 
+    // More generics learning
+    val boxy = Box("hi")
+    boxy.doIt()
+
+    // Get ANY object's class
+    (5).getClass().also(::println)
+
+    boxy.getStringLength()
+
+    Box(5).getStringLength()
+
+
+
 }
+
+// Let's make a super generic and do it below
+fun Any.getClass(): Class<Any> {
+    return this.javaClass
+}
+fun Any.dump() {
+    println(this.toString())
+}
+
+class Box<Type>(val data: Type) {
+    fun doIt() {
+        println("$data is the data")
+        println("${data!!::class.java}")
+        println("this is an instance of ${this.getClass()}")
+    }
+}
+
+fun <Type> Box<Type>.getStringLength() {
+    when (this.data) {
+        is String -> this.data.length
+        is Char -> 1
+        else -> 0
+    }.dump()
+}
+
+// No idea when I'd use this in a game but cool
+sealed class Seal {
+    val blah = 5
+}
+
 data class Chunk (
     val posX: Int,
     val posY: Int,
