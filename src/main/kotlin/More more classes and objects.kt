@@ -35,9 +35,19 @@ fun noIdeaWhatToCallThis() {
 
     Box(5).getStringLength()
 
+    if (boxy is List<*>) {
+        throw RuntimeException("uh oh")
+    } else if (boxy is Box<*>) {
+        println("yay")
+    }
 
+    // Time for enums
+    enums()
 
 }
+
+// Input means: Generic constructor inputs, output means class storage
+class Cule<in T, out Z>(test: T, val z: Z)
 
 // Let's make a super generic and do it below
 fun Any.getClass(): Class<Any> {
