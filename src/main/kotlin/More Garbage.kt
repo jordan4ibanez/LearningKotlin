@@ -53,8 +53,26 @@ fun beginMoreGarbage() {
 
     blarf.blah()
     blarf2.blah()
-    
 
+    for (i in 1..10) {
+        SingleTonTheThird.update()
+    }
+    SingleTonTheThird.poll().also { SingleTonTheThird.yell(it) }
+
+}
+
+object SingleTonTheThird {
+    private const val x = 5
+    private var y = 0
+    fun update() {
+        y += x
+    }
+    fun poll(): Int {
+        return y
+    }
+    fun yell(input: Int) {
+        println("Yes I contain the number $y you gave me $input")
+    }
 }
 
 interface What {
