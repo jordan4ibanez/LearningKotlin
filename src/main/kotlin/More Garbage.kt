@@ -59,6 +59,22 @@ fun beginMoreGarbage() {
     }
     SingleTonTheThird.poll().also { SingleTonTheThird.yell(it) }
 
+    // This is a static method
+    StaticBoi.blah()
+    // This too
+    StaticBoi.moreBlah()
+
+}
+
+
+// This is jvm equivalent to having a class with all static components
+class StaticBoi private constructor() {
+    companion object {
+        @JvmStatic
+        fun blah() = println("I'm static woo")
+        @JvmStatic
+        fun moreBlah() = println("hi there")
+    }
 }
 
 object SingleTonTheThird {
