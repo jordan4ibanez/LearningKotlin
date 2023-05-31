@@ -49,6 +49,7 @@ fun timeForFunctions(input: String) {
         println("It's true!")
     } end m
 
+    timeForAnotherStupidExperiment()
 }
 
 // I wanted to make this look like lua for no reason
