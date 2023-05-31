@@ -1,4 +1,5 @@
 fun timeForAnotherStupidExperiment() {
+    // I'mma call it jBASIC, I'm sure that'll catch on
     val basic = BASIC("""
         10 assign x 0
         20 print this_is_very_BASIC
