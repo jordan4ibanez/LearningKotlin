@@ -44,11 +44,20 @@ fun timeForFunctions(input: String) {
 
     println("The result of this experiment is: ($test)")
 
+    (true) then {
+        println("It's true!")
+    } end m
+
 }
+
+// I wanted to make this look like lua for no reason
+object m
 
 // You could probably turn this language into Lisp or some sort of Haskell thing
 infix fun Any.then(function: (Any) -> Any) = function(this)
 infix fun Any.with(functionData: Pair<Any, (Any, Any) -> Any>) = functionData.second(this, functionData.first)
+
+infix fun Any.end(m: m){}
 
 // That's so sick
 infix fun Any.compare(any: Any): Boolean {
