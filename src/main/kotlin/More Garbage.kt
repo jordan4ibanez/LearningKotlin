@@ -64,8 +64,49 @@ fun beginMoreGarbage() {
     // This too
     StaticBoi.moreBlah()
 
+    val autoAccumulator = OperatorTest()
+
+    autoAccumulator["hi"] = 5
+
+    autoAccumulator["hi"].also(::println)
+
+    val cuule: Word = "hi"
+
+    timeForFunctions()
+
 }
 
+class OperatorTest {
+    private val map: MutableMap<String, Any> = mutableMapOf()
+
+    private val reserved = "__reserved"
+
+    init {
+        map[reserved] = 0
+    }
+
+    operator fun set(property: String, value: Any) {
+        tickUp()
+        map[property] = value
+    }
+
+    operator fun get(property: String): Any {
+        tickUp()
+        return map[property] ?: Nothing()
+    }
+
+    private fun tickUp() {
+        var counter: Int = map[reserved] as Int
+        map[reserved] = counter++
+    }
+
+    private fun reserveCheck(input: String) {
+        if (input == reserved) {
+            throw RuntimeException("$reserved is a reserved keyword!")
+        }
+    }
+}
+typealias Word = String
 
 // This is jvm equivalent to having a class with all static components
 class StaticBoi private constructor() {
