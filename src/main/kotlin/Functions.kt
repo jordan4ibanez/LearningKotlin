@@ -44,6 +44,7 @@ fun timeForFunctions(input: String) {
 
     println("The result of this experiment is: ($test)")
 
+    // I somehow made Lua syntax worse! Hooray
     (true) then {
         println("It's true!")
     } end m
