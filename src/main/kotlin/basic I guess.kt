@@ -1,7 +1,7 @@
 fun timeForAnotherStupidExperiment() {
     val basic = BASIC("""
         10 assign x 0
-        20 print this_is_very_BASIC end
+        20 print this_is_very_BASIC
         30 add x 1
         40 equals x 10 break 
         50 goto 20
@@ -90,7 +90,7 @@ class BASIC(sourceCode: String) {
             when {
                 // No safety check for now
                 isOp(word) -> {
-                    memory = doOp(word, clc[i + 1], clc[ i + 2])
+                    memory = doOp(word, clc[i + 1], if (clc.size > 2) clc[ i + 2] else "")
                 }
                 // Basic goto implementation
                 word == "goto" -> {
