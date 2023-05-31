@@ -38,9 +38,7 @@ fun timeForFunctions(input: String) {
 
         return@stage2 "How is this even possible?"
     } with Pair(" 123") stage3@{ thenOutput, pairInput ->
-        if (thenOutput !is String || pairInput !is String) {
-            return@stage3 Nothing()
-        }
+        if (thenOutput !is String || pairInput !is String) return@stage3 Nothing()
         return@stage3 thenOutput + pairInput
     }
 
