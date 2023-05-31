@@ -72,7 +72,7 @@ fun beginMoreGarbage() {
 
     val cuule: Word = "hi"
 
-    timeForFunctions()
+    timeForFunctions("time for functions!")
 
 }
 
