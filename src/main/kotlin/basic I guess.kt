@@ -1,9 +1,7 @@
-import java.lang.StringBuilder
-
 fun timeForAnotherStupidExperiment() {
     val basic = BASIC("""
         10 assign x 0
-        20 print hello end
+        20 print this_is_very_BASIC end
         30 add x 1
         40 equals x 10 break 
         50 goto 20
