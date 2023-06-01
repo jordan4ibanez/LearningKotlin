@@ -4,6 +4,7 @@ fun timeForAnotherStupidExperiment() {
         10 assign x 0
         20 print this_is_very_BASIC
         30 add x 1
+        // If it is equal to 10 loops exit the program
         40 equals x 10 break 
         50 goto 20
     """.trimIndent()
@@ -31,7 +32,12 @@ class BASIC(sourceCode: String) {
 
         sourceCode.split('\n').forEach { line ->
             val temp = line.split(' ').toMutableList()
-            val lineNumber = temp.removeAt(0).toInt()
+            val lineNumber = try {
+                temp.removeAt(0).toInt()
+            } catch (e: Exception) {
+                -1
+            }
+            if (lineNumber == -1) return@forEach
 
             if (lineNumber < currentLine) throw RuntimeException("BASIC ERROR: Line numbers must be in order.")
             currentLine = lineNumber
@@ -89,6 +95,7 @@ class BASIC(sourceCode: String) {
 
         clc.forEachIndexed { i, word ->
             when {
+                word == "//" -> return
                 // No safety check for now
                 isOp(word) -> {
                     memory = doOp(word, clc[i + 1], if (clc.size > 2) clc[ i + 2] else "")
