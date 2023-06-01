@@ -12,6 +12,12 @@ fun timeForAnotherStupidExperiment() {
     )
 
     basic.run()
+
+    // That is the most basic BASIC basically
+
+    // Onto the next
+
+    noMoreBasicPlz()
 }
 
 
@@ -94,7 +100,6 @@ class BASIC(sourceCode: String) {
 
         // Very basic boolean memory for logic flow
         var memory = true
-        var goto = false
 
         clc.forEachIndexed { i, word ->
             when {
@@ -106,7 +111,7 @@ class BASIC(sourceCode: String) {
                 // Basic goto implementation
                 word == "goto" -> {
                     nextLine = clc[i + 1].toInt()
-                    goto = true
+                    return
                 }
                 word == "break" -> {
                     if (memory) running = false
@@ -114,12 +119,10 @@ class BASIC(sourceCode: String) {
             }
         }
 
-        if (!goto) {
-            lineOrder.forEach {
-                if (it > nextLine) {
-                    nextLine = it
-                    return
-                }
+        lineOrder.forEach {
+            if (it > nextLine) {
+                nextLine = it
+                return
             }
         }
     }
