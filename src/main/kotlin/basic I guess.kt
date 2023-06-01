@@ -3,10 +3,11 @@ fun timeForAnotherStupidExperiment() {
     val basic = BASIC("""
         10 assign x 0
         20 print this_is_very_BASIC
-        30 add x 1
+        30 print var x
+        40 add x 1
         // If it is equal to 10 loops exit the program
-        40 equals x 10 break 
-        50 goto 20
+        50 equals x 10 break 
+        60 goto 20
     """.trimIndent()
     )
 
@@ -78,9 +79,11 @@ class BASIC(sourceCode: String) {
             "equals" -> {
                 return varMap[variable] == value.toInt()
             }
-            "print" -> {
-                println(variable)
+            "print" -> when (variable) {
+                "var" -> println(varMap[value])
+                else -> println(variable)
             }
+
         }
         return false
     }
