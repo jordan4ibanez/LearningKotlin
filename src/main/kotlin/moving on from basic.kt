@@ -46,6 +46,43 @@ fun noMoreBasicPlz() {
     val blah = { i: String -> println(i)}
 
 
+    // So let's say we only want a string that's a number
+
+    // functional
+    fun sanitizeNumeric(input: String): Boolean {
+        input.forEach {
+            if (!it.isDigit()) return false
+        }
+        return true
+    }
+
+    // OOP
+    fun String.sanitizeNumeric(): Boolean {
+        this.forEach {
+            if (!it.isDigit()) return false
+        }
+        return true
+    }
+
+    val testStrings = arrayOf("test", "test2", "test123", "123", "flarp1", "123s")
+
+    println("BEGIN FUNCTIONAL")
+    // functional
+    testStrings.forEachIndexed { testID, word ->
+        sanitizeNumeric(word).also{println("test $testID is sanitized? $it")}
+    }
+
+    println("BEGIN OOP")
+    // OOP
+    for ((testID, word) in testStrings.withIndex()) {
+        word.sanitizeNumeric().also{println("test $testID is sanitized? $it")}
+    }
+
+    println("BEGIN ONE LINER FUNCTIONAL")
+    // or we could have just done this
+    testStrings.forEachIndexed { testID, word ->
+        (word.toIntOrNull() ?: false).then{ println("test $testID is sanitized? ${it is Int}") }
+    }
 
 }
 
