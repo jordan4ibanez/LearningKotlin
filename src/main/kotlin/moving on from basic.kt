@@ -33,6 +33,19 @@ fun noMoreBasicPlz() {
 
     (1..10).forEach{ _ -> zombie.runLogic()}
 
+    // lambda expression syntax
+    val sum: (Int, Int) -> Int = { x: Int, y: Int -> x + y}
+
+    sum(1, 2).also(::println)
+
+    // lambda expression syntax without optional annotations
+    val sum2 = { x: Int, y: Int -> x + y}
+
+    sum(1, 2).also(::println)
+
+    val blah = { i: String -> println(i)}
+
+
 
 }
 
