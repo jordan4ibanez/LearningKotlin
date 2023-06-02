@@ -84,6 +84,18 @@ fun noMoreBasicPlz() {
         (word.toIntOrNull() ?: false).then{ println("test $testID is sanitized? ${it is Int}") }
     }
 
+    /*
+    Since doubles and floats are a lot harder to parse,
+    the built-in Float and Double methods are a lot easier to work with.
+    Notice that the last value has no "f" but it is still approved.
+    */
+    val arrayOfFloatStrings = arrayOf("12.123f", "123.349f", "12983.0f", "nope", "stillnot0.123f", "123.91")
+
+    arrayOfFloatStrings.forEachIndexed { testID, word ->
+        (word.toFloatOrNull() ?: false).then{ println("float test $testID is sanitized? ${it is Float}")}
+    }
+
+
 }
 
 // Example 1: 0 argument delegate function
