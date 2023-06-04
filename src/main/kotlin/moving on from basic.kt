@@ -103,11 +103,26 @@ fun noMoreBasicPlz() {
     integerOrString(45)
     integerOrString("hi")
 
+    integerOrStringGeneric(45)
+    integerOrStringGeneric("hi")
+
+    // Can also do ceylon reverser fun
+    "test123".reversed().print("The Test")
+
+    // Onto Async
+    doSomeAsync()
 
 }
 
 // I was looking at Ceylon and thought this was a nice exercise
 fun integerOrString(input: Any) = when (input) {
+    is Int -> println("Got the integer $input")
+    is String -> println("Got the string $input")
+    else -> {}
+}
+
+// Generics way of implementing that
+fun <T> integerOrStringGeneric(input: T) = when(input) {
     is Int -> println("Got the integer $input")
     is String -> println("Got the string $input")
     else -> {}
