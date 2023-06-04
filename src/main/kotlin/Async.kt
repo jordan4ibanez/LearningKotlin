@@ -1,6 +1,8 @@
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlin.random.Random
 
 // This is a runBlocking scope.
@@ -43,7 +45,7 @@ fun doSomeAsync() = runBlocking {
                 for (i in 0..20) {
                     builder.append(Random.nextInt(255).toChar())
                 }
-                println("appending ${builder.toString()}")
+//                println("appending ${builder.toString()}")
                 myCoolList.add(builder.toString())
             }
         }
@@ -56,11 +58,46 @@ fun doSomeAsync() = runBlocking {
             if (myCoolList.isEmpty()) return@launch
 
             val gotten = myCoolList[Random.nextInt(myCoolList.size)]
-            println("retrieving $gotten")
+//            println("retrieving $gotten")
         }
     }
 
+    // So that still didn't cause it, let's do something extra dumb
+    var accumulator = 0
+
+    val complexJob = launch {
+        (0..5_000_000).forEach {
+            launch {
+//                if (Random.nextBoolean()) accumulator += 1 else accumulator -= 1
+                accumulator++
+            }
+        }
+    }
+
+    complexJob.join()
+    println("the accumulator is $accumulator")
+
     // I honestly have no idea how this doesn't crash, some kind of miracle
+
+    // But this is the safest option
+
+    val mutex = Mutex()
+    var newAccumulator = 0
+
+    val synchronizedJob = launch {
+        (0..2_000_000).forEach {
+            launch {
+                mutex.withLock {
+                    newAccumulator++
+                }
+            }
+        }
+    }
+
+    synchronizedJob.join()
+    println("synchronized accumulator: $newAccumulator")
+
+
 
 }
 
