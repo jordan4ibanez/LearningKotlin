@@ -60,6 +60,8 @@ fun doSomeAsync() = runBlocking {
         }
     }
 
+    // I honestly have no idea how this doesn't crash, some kind of miracle
+
 }
 
 // Suspend functions are pretty neat, useful
