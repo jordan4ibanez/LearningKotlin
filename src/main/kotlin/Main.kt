@@ -12,6 +12,8 @@ fun sum(a: Number, b: Number) = a.toDouble().plus(b.toDouble()) as Number
 
 fun doesNothing(a: Any) = println(a)
 
+// Main was created when I literally had no idea what I was doing, so that's why it looks so weird.
+// I am keeping it like this to document the learning journey.
 fun main() = run {
     val atomicCounter = AtomicInteger(2)
     runBlocking {
