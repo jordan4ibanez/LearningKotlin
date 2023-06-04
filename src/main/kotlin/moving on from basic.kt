@@ -109,9 +109,8 @@ fun noMoreBasicPlz() {
     // Can also do ceylon reverser fun
     "test123".reversed().print("The Test")
 
-    // Onto Async
+    // A coroutine capable scope
     doSomeAsync()
-
 }
 
 // I was looking at Ceylon and thought this was a nice exercise
