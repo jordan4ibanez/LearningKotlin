@@ -95,7 +95,32 @@ fun noMoreBasicPlz() {
         (word.toFloatOrNull() ?: false).then{ println("float test $testID is sanitized? ${it is Float}")}
     }
 
+    val bloof = "hi"
 
+    bloof.print()
+    bloof.print("bloof")
+
+    integerOrString(45)
+    integerOrString("hi")
+
+
+}
+
+// I was looking at Ceylon and thought this was a nice exercise
+fun integerOrString(input: Any) = when (input) {
+    is Int -> println("Got the integer $input")
+    is String -> println("Got the string $input")
+    else -> {}
+}
+
+// I find this extremely useful.
+// Also, this is function overloading
+fun String.print() {
+    println(this)
+}
+
+fun String.print(varName: String) {
+    println("$varName: $this")
 }
 
 // Example 1: 0 argument delegate function
