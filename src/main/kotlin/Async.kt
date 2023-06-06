@@ -1,8 +1,7 @@
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.lang.System.currentTimeMillis
 import kotlin.random.Random
 
 // This is a runBlocking scope.
@@ -66,7 +65,7 @@ fun doSomeAsync() = runBlocking {
     var accumulator = 0
 
     val complexJob = launch {
-        (0..5_000_000).forEach {
+        (0..5_000_000).forEach { _ ->
             launch {
 //                if (Random.nextBoolean()) accumulator += 1 else accumulator -= 1
                 accumulator++
@@ -85,7 +84,7 @@ fun doSomeAsync() = runBlocking {
     var newAccumulator = 0
 
     val synchronizedJob = launch {
-        (0..2_000_000).forEach {
+        (0..2_000_000).forEach { _ ->
             launch {
                 mutex.withLock {
                     newAccumulator++
@@ -98,6 +97,36 @@ fun doSomeAsync() = runBlocking {
     println("synchronized accumulator: $newAccumulator")
 
 
+    val job2 = launch {
+        repeat(1000) { i ->
+            println("Job: I'm sleeping $i")
+            delay(500)
+        }
+    }
+
+    delay(1500L)
+
+    println("Main: Tired of waiting")
+    job2.cancel()
+    job2.join()
+    println("Now I can quit")
+
+    val startTime = currentTimeMillis()
+
+    val job3 = launch(Dispatchers.Default) {
+        var nextPrintTime = startTime
+        var i = 0
+        while (isActive) {
+            if (currentTimeMillis() >= nextPrintTime) {
+                println("Job 3: I'm sleeping ${i++}")
+                nextPrintTime += 500
+            }
+        }
+    }
+
+    delay(1000)
+
+    job3.cancel("goodbye")
 
 }
 
